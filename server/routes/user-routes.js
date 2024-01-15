@@ -2,17 +2,7 @@ const router = require('express').Router();
 const User = require("../controllers/User.js");
 const { pool } = require("../config/db/db.js");
 
-router.post('/users', async(req, res) => {
-    //const id = parseInt(request.params.id)
-    const { id, name, email } = req.body
-    const password = 123;
-    const date = new Date();
-    const result = await pool.query(
-        'INSERT INTO users (id, username, email, password, creation_date) VALUES ($1, $2, $3, $4, $5)', [id, name, email, password, date])
 
-    res.status(201).send(`User added with ID: ${result.insertId}`)
-
-});
 router.get('/users_all', async(req, res) => {
     const result = await pool.query('SELECT * FROM users;')
     res.status(201).json(result.rows)
@@ -44,21 +34,6 @@ router.post('/register', async(req, res) => {
         }
     }
 })
-
-router.get('/taskbar/photo/:userId', async(req, res) => {
-    let userId = req.params.userId;
-    try {
-        let result = await pool.query('SELECT profile_image, username from users WHERE id=$1;', [userId]);
-        if (result.rows) {
-            console.log(result.rows)
-            res.json(result.rows);
-        }
-    } catch (error) {
-        console.log(error);
-        res.send(error);
-    }
-
-});
 
 
 
