@@ -29,7 +29,7 @@ module.exports = {
                     return {
                         status: 'success',
                         message: 'USER_REGISTERED_SUCCESSFULLY',
-                        payload: (await sessionResult).payload
+                        // payload: (await sessionResult).payload
                     }
                 }
             } catch (err) {
@@ -61,7 +61,7 @@ module.exports = {
                         return {
                             status: 'success',
                             message: 'USER_IS_AUTHENTICATED',
-                            payload: (await sessionResult).payload
+                            // payload: (await sessionResult).payload
                         }
                     } else {
 
