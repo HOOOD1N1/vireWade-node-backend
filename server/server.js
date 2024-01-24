@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config()
 const app = express();
 const cors = require("cors");
 const http = require('http');
@@ -8,6 +9,8 @@ const { pool } = require("./config/db/db");
 var multer = require('multer');
 const userRouter = require('./routes/user-routes');
 const crypto = require('crypto');
+const randomstring = require("randomstring");
+const querystring = require('node:querystring');
 
 var upload = multer({
     storage: multer.diskStorage({
@@ -103,8 +106,22 @@ if (result.rowCount === 1) {
 //res.send()
 });
 
+app.get('/spotify/login', function(req, res) {
 
+    console.log('Log into spotify + clientId: ' + process.env.CLIENT_ID);
 
+    var state = randomstring.generate(16);
+    var scope = 'user-read-private user-read-email';
+  
+    res.redirect('https://accounts.spotify.com/authorize?' +
+      querystring.stringify({
+        response_type: 'code',
+        client_id: process.env.CLIENT_ID,
+        scope: scope,
+        redirect_uri: process.env.REDIRECT_URI,
+        state: state    
+      }));
+  });
 
 const server = http.createServer(app);
 
