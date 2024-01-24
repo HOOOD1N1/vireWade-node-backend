@@ -111,17 +111,18 @@ app.get('/spotify/login', function(req, res) {
     console.log('Log into spotify + clientId: ' + process.env.CLIENT_ID);
 
     var state = randomstring.generate(16);
-    var scope = 'user-read-private user-read-email';
+    var scope = 'user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public';
   
     res.redirect('https://accounts.spotify.com/authorize?' +
       querystring.stringify({
-        response_type: 'code',
         client_id: process.env.CLIENT_ID,
         scope: scope,
         redirect_uri: process.env.REDIRECT_URI,
-        state: state    
+        state: state,
+        response_type: 'token'   
       }));
   });
+
 
 const server = http.createServer(app);
 
