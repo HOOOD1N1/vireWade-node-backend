@@ -14,8 +14,10 @@ router.post('/login', async(req, res) => {
     const { email, password } = req.body;
     const result = await User.authenticate({ email: email, password: password })
     console.log('here is payload' + JSON.stringify(result.payload));
-    if (result) {
+    if (result.status == 'success') {
         res.send(JSON.stringify(result));
+    } else {
+        res.status(500).send(JSON.stringify(result));
     }
 });
 
