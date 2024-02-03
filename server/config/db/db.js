@@ -1,27 +1,15 @@
 const { Pool } = require('pg')
+require('dotenv').config()
 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'vinyl',
-    password: 'postgres',
-    port: 5432
+    user: process.env.USER,
+    host: process.env.HOST,
+    database: process.env.DATABASE,
+    password: process.env.PASSWORD,
+    port: process.env.PORT
 });
 
 
-/*
-const client = new Client()
-client.connect()
-*/
-
 module.exports = {
     pool
-    // query: (text, params, callback) => {
-    //     const start = Date.now()
-    //     return pool.query(text, params, (err, res) => {
-    //         const duration = Date.now() - start
-    //         console.log('executed query', { text, duration, /*rows: res.rowCount*/ })
-    //         callback(err, res)
-    //     })
-    // },
 }

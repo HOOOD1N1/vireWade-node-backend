@@ -13,7 +13,6 @@ router.post('/login', async(req, res) => {
 
     const { email, password } = req.body;
     const result = await User.authenticate({ email: email, password: password })
-    console.log('here is payload' + JSON.stringify(result.payload));
     if (result.status == 'success') {
         res.send(JSON.stringify(result));
     } else {
@@ -24,9 +23,7 @@ router.post('/login', async(req, res) => {
 router.post('/register', async(req, res) => {
     console.log("register")
     const result = await User.create(req.body)
-    console.log("result is " + JSON.stringify(result))
     if (result) {
-        console.log("there is a result")
         const { status, message } = result;
         if (status === 'error') {
             res.status(500);
