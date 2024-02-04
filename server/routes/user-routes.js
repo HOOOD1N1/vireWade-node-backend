@@ -4,7 +4,7 @@ const { pool } = require("../config/db/db.js");
 
 
 router.get('/users_all', async(req, res) => {
-    const result = await pool.query('SELECT * FROM users;')
+    const result = await pool.query('SELECT * FROM members;')
     res.status(201).json(result.rows)
 });
 

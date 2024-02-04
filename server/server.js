@@ -62,7 +62,7 @@ app.get('/main/user/:id', async(req, res) => {
     var userId = req.params.id;
     console.log(userId);
     try {
-        const result = await pool.query('SELECT first_name,last_name FROM members WHERE id=$1;', [userId]);
+        const result = await pool.query('SELECT first_name,last_name,email,creation_date FROM members WHERE id=$1;', [userId]);
         if (result) {
             console.log(result.rows[0])
             res.status(200);
