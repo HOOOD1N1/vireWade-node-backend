@@ -26,7 +26,7 @@ WORKDIR /VIREWADE-NODE-BACKEND
 COPY --from=build /VIREWADE-NODE-BACKEND .
 
 # Expose the port your app runs on
-EXPOSE 8888  # Change this if your app uses a different port
+EXPOSE 8888
 
 # Command to run the application
 CMD ["npm", "start"]
